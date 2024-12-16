@@ -5,25 +5,16 @@ class Solution:
         """
         n = len(matrix)
         m = len(matrix[0])
-
-        def mark_row(i):
-            for j in range(m):
-                if matrix[i][j] != 0:
-                    matrix[i][j] = 'weee'
-        def mark_col(j):
-            for i in range(n):
-                if matrix[i][j]!=0:
-                    matrix[i][j]='weee'
-        
+        row_arr = [False] * n
+        col_arr = [False] * m
         for i in range(n):
             for j in range(m):
                 if matrix[i][j]==0:
-                    mark_row(i)
-                    mark_col(j)
-
+                    row_arr[i] = True
+                    col_arr[j] = True
+        
         for i in range(n):
             for j in range(m):
-                if matrix[i][j]=='weee':
-                    matrix[i][j]=0
-        
-        
+                if row_arr[i] or col_arr[j]:
+                    matrix[i][j] = 0
+
