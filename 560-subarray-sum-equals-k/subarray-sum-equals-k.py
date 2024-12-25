@@ -3,8 +3,16 @@ class Solution:
         subarrays = 0
         subarraySums = {0 : 1}
         prefixSum = 0
+        
         for num in nums:
             prefixSum += num
-            subarrays += subarraySums.get(prefixSum - k, 0)
-            subarraySums[prefixSum] = subarraySums.get(prefixSum, 0) + 1
+
+            if prefixSum-k in subarraySums:
+                subarrays += subarraySums[prefixSum - k]
+            
+            if prefixSum not in subarraySums:
+                subarraySums[prefixSum] = 1
+            else:
+                subarraySums[prefixSum] += 1
+
         return subarrays
