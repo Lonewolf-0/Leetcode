@@ -10,7 +10,7 @@ class Solution:
             else:
                 arr2.append(i)
 
-        print(arr1,arr2)
+        # print(arr1,arr2)
 
         for i in range(len(nums)//2):
             ans.append(arr1[i])
