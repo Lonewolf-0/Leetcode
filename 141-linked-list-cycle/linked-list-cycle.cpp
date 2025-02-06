@@ -14,19 +14,15 @@ public:
         dummy->next = head;
         ListNode *s = dummy;
         ListNode *f = head;
-        if (f==NULL || f->next == NULL ){
-            return false;
-        }
-        // if (f->next == head){
-        //     return head;
-        // }
+        
 
         while(s!=f){
-            s= s == NULL ? head : s->next;
-            f= f == NULL ? head : f->next->next;
             if (f==NULL || f->next == NULL ){
             return false;
             }
+            s= s == NULL ? head : s->next;
+            f= f == NULL ? head : f->next->next;
+            
         }
         return s;
 
