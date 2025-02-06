@@ -17,9 +17,9 @@ public:
         if (f==NULL || f->next == NULL ){
             return false;
         }
-        if (f->next == head){
-            return head;
-        }
+        // if (f->next == head){
+        //     return head;
+        // }
 
         while(s!=f){
             s= s == NULL ? head : s->next;
