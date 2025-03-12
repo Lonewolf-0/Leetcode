@@ -1,30 +1,22 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-
         n = len(s)
-        def expand(left,right,n):
+        if n == 0:
+            return ""
 
-            while left>=0 and right <n and s[left] == s[right]:
-                left -=1
-                right +=1
-
-            return right-left - 1, s[left+1:right]
-        maxlen = 0
-        sub = ""
+        def expand(left: int, right: int) -> str:
+            while left >= 0 and right < n and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return s[left + 1:right]  
+        longest = ""
         for i in range(n):
+            odd_palindrome = expand(i, i)
+            even_palindrome = expand(i, i + 1)
 
-            len1, sub1 = expand(i,i,n)
-            len2, sub2 = expand(i,i+1,n)
+            if len(odd_palindrome) > len(longest):
+                longest = odd_palindrome
+            if len(even_palindrome) > len(longest):
+                longest = even_palindrome
 
-            if len1 > maxlen:
-                sub = sub1
-                maxlen = len1
-            if len2 > maxlen:
-                sub = sub2
-                maxlen = len2
-
-        return sub
-            
-
-                
-        
+        return longest
