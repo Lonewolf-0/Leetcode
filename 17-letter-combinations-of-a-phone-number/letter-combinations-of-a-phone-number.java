@@ -1,37 +1,34 @@
 class Solution {
     public List<String> letterCombinations(String digits) {
-        List<String> res = new ArrayList<>();
+        Map<Character, String> map = new HashMap<>();
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+
+        List<String> res= new ArrayList<>();
+        backtrack(map, digits, new StringBuilder(), 0, res);
+        return res;
         
-        if (digits == null || digits.length() == 0) {
-            return res;
-        }
-        
-        Map<Character, String> digitToLetters = new HashMap<>();
-        digitToLetters.put('2', "abc");
-        digitToLetters.put('3', "def");
-        digitToLetters.put('4', "ghi");
-        digitToLetters.put('5', "jkl");
-        digitToLetters.put('6', "mno");
-        digitToLetters.put('7', "pqrs");
-        digitToLetters.put('8', "tuv");
-        digitToLetters.put('9', "wxyz");
-        
-        backtrack(digits, 0, new StringBuilder(), res, digitToLetters);
-        
-        return res;        
     }
 
-    private void backtrack(String digits, int idx, StringBuilder comb, List<String> res, Map<Character, String> digitToLetters) {
-        if (idx == digits.length()) {
-            res.add(comb.toString());
+    public void backtrack(Map<Character, String> map, String digits, StringBuilder current, int p, List<String> res)
+    {
+        if (p== digits.length())
+        {
+            res.add(current.toString());
             return;
         }
-        
-        String letters = digitToLetters.get(digits.charAt(idx));
-        for (char letter : letters.toCharArray()) {
-            comb.append(letter);
-            backtrack(digits, idx + 1, comb, res, digitToLetters);
-            comb.deleteCharAt(comb.length() - 1);
+
+        for (int i=0;i<map.get(digits.charAt(p)).length();i++)
+        {
+            current.append(map.get(digits.charAt(p)).charAt(i));
+            backtrack(map, digits, current, p+1, res);
+            current.deleteCharAt(current.length()-1);
         }
-    }    
+    }
 }
