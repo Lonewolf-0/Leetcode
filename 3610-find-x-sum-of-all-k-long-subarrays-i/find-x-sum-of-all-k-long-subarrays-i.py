@@ -8,13 +8,10 @@ class Solution:
             
             freq = Counter(window)
             
-            # Step 3: Sort by (frequency desc, value desc)
             sorted_items = sorted(freq.items(), key=lambda p: (-p[1], -p[0]))
             
-            # Step 4: Take top x elements
             top_x = sorted_items[:x]
             
-            # Step 5: Compute X-Sum
             x_sum = sum(val * count for val, count in top_x)
             result.append(x_sum)
         
