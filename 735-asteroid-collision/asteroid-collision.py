@@ -1,18 +1,16 @@
+from typing import List
+
 class Solution:
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
         stack = []
-        destroyed = False
-        for i in asteroids:
-            if i>0 :
-                stack.append(i)
-            else:
-                while len(stack)!=0 and stack[-1]>0 and stack[-1] <= abs(i):
-                    if stack[-1] == abs(i):
-                        stack.pop()
-                        destroyed = True
-                        break
+        for a in asteroids:
+            while stack and a < 0 < stack[-1]:
+                if stack[-1] < -a:   # top asteroid smaller, destroyed
                     stack.pop()
-                if (len(stack)==0 or stack[-1]<0) and not destroyed:
-                    stack.append(i)
-                destroyed = False
+                    continue
+                elif stack[-1] == -a:  # both destroyed
+                    stack.pop()
+                break
+            else:
+                stack.append(a)
         return stack
